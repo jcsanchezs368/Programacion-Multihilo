@@ -22,6 +22,26 @@ public class Sala {
 		this.trofeo = trofeo;
 		this.nivelMinimo = new Random().nextInt(9) + 1;
 	}
+	
+	public Heroe batallar(){
+		if(this.heroes.remainingCapacity() == 0) {
+			Heroe heroe1 = heroes.poll();
+			Heroe heroe2 = heroes.poll();
+			while(heroe1.getVida() > 0 && heroe2.getVida() > 0) {
+				heroe1.atacar(heroe2);
+				if(heroe2.getVida() > 0) {
+					heroe2.atacar(heroe1);
+				}
+			}
+			
+			if(heroe1.getVida() > 0) {
+				return heroe1;
+			}else {
+				return heroe2;
+			}
+		}
+		return null;
+	}
 
 	public int getFila() {
 		return fila;
@@ -70,6 +90,5 @@ public class Sala {
 	public void setNivelMinimo(int nivelMinimo) {
 		this.nivelMinimo = nivelMinimo;
 	}
-	
 	
 }
